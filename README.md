@@ -73,6 +73,10 @@ This creates a dist folder with static files that can be served by Nginx or the 
 
 ## API Documentation
 Base URL: http://localhost:5000/api
-Method,Endpoint,Description,Payload
-POST,/auth/register,Register a new user,"{ ""username"": ""dan"", ""email"": ""dan@test.com"", ""password"": ""123"" }"
-POST,/auth/login,Login user,"{ ""email"": ""dan@test.com"", ""password"": ""123"" }"
+
+Authentication
+| Method | Endpoint       | Description         | Payload                                                                 |
+|--------|----------------|---------------------|-------------------------------------------------------------------------|
+| POST   | /auth/register | Register a new user | `{ "username": "name", "email": "name@test.com", "password": "123" }`     |
+| POST   | /auth/login    | Login user          | `{ "email": "name@test.com", "password": "123" }`                        |
+
