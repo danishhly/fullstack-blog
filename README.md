@@ -110,9 +110,12 @@ Create Post:
 **Screenshots**
 **1. Home Feed (with Pagination & Search)**
 ![Feed Screenshot](client/assets/HomePage.png)
-![Feed Screenshot](client/assets/Pagination.png)
+![Feed Screenshot](client/assets/pagination.png)
 
 **2. Post Detail View**
-
+![Feed Screenshot](client/assets/postdetail1.png)
+This can be viewed by everyone but can't be edited
 
 **3. Create/Edit Form**
+![Feed Screenshot](client/assets/Postdetails.png)
+This can be edited and deleted by owner of the post only
