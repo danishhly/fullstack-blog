@@ -1,8 +1,6 @@
-// U:\fullstack-blog\client\postcss.config.js
-module.exports = {
+export default {
   plugins: {
-    // These need to be objects or strings specifying the plugin
-    'tailwindcss': {},
-    'autoprefixer': {},
+    tailwindcss: {},
+    autoprefixer: {},
   },
 }
