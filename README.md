@@ -80,3 +80,6 @@ Authentication
 | POST   | /auth/register | Register a new user | `{ "username": "name", "email": "name@test.com", "password": "123" }`     |
 | POST   | /auth/login    | Login user          | `{ "email": "name@test.com", "password": "123" }`                        |
 
+Posts
+Note: Write operations require Authorization: Bearer <token> header.
+
