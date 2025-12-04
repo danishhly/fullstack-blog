@@ -24,7 +24,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-gray-50 text-gray-900">
+        <div className="min-h-screen bg-slate-50 text-slate-900">
           <Toaster position="top-center" />
           <Navbar />
 

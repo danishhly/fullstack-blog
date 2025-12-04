@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      "Segoe UI", sans-serif;
+  }
+
+  ::selection {
+    @apply bg-slate-900 text-slate-50;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-colors border border-transparent bg-slate-900 text-slate-50 hover:bg-slate-800;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-colors border border-transparent bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100;
+  }
+
+  .card {
+    @apply bg-white border border-slate-200 rounded-2xl shadow-sm;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 bg-white;
+  }
+
+  .page-shell {
+    @apply max-w-4xl mx-auto px-4 pb-10 pt-6;
+  }
+}

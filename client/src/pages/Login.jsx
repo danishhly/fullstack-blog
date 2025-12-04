@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await API.post('/auth/login', formData);
-      login(data.token, data.user); // Save to context & localStorage
+      login(data.token, data.user);
       toast.success(`Welcome back, ${data.user.username}!`);
       navigate('/');
     } catch (err) {
@@ -22,16 +22,53 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <input className="w-full mb-4 p-2 border rounded" type="email" placeholder="Email" 
-          onChange={(e) => setFormData({...formData, email: e.target.value})} required />
-        <input className="w-full mb-6 p-2 border rounded" type="password" placeholder="Password" 
-          onChange={(e) => setFormData({...formData, password: e.target.value})} required />
-        <button className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">Login</button>
-        <p className="mt-4 text-center text-sm">
-          Don't have an account? <Link to="/register" className="text-blue-500">Register</Link>
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="card w-full max-w-sm space-y-5 p-6"
+      >
+        <div>
+          <h2 className="text-lg font-semibold text-slate-900">Log in</h2>
+          <p className="text-xs text-slate-500">Welcome back to MonoBlog.</p>
+        </div>
+
+        <div className="space-y-3 text-sm">
+          <div>
+            <label className="mb-1 block text-slate-600">Email</label>
+            <input
+              className="input"
+              type="email"
+              placeholder="you@example.com"
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-slate-600">Password</label>
+            <input
+              className="input"
+              type="password"
+              placeholder="••••••••"
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              required
+            />
+          </div>
+        </div>
+
+        <button className="btn-primary w-full">Login</button>
+
+        <p className="text-center text-xs text-slate-500">
+          Don&apos;t have an account?{' '}
+          <Link
+            to="/register"
+            className="font-medium text-slate-900 underline-offset-4 hover:underline"
+          >
+            Register
+          </Link>
         </p>
       </form>
     </div>

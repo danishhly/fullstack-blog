@@ -12,50 +12,80 @@ const PostDetail = () => {
 
   useEffect(() => {
     API.get(`/posts/${id}`)
-      .then(res => setPost(res.data))
-      .catch(err => console.error(err));
+      .then((res) => setPost(res.data))
+      .catch((err) => console.error(err));
   }, [id]);
 
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this post?")) return;
-    
+    if (!window.confirm('Are you sure you want to delete this post?')) return;
+
     try {
       await API.delete(`/posts/${id}`);
-      toast.success("Post deleted");
+      toast.success('Post deleted');
       navigate('/');
     } catch (err) {
-      toast.error("Failed to delete post");
+      toast.error('Failed to delete post');
     }
   };
 
-  if (!post) return <div className="text-center mt-10">Loading...</div>;
+  if (!post) {
+    return (
+      <div className="page-shell">
+        <div className="py-16 text-center text-sm text-slate-500">Loading…</div>
+      </div>
+    );
+  }
 
-  // KEY LOGIC: Check ownership
   const isOwner = user && user.id === post.authorId;
 
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-white shadow rounded mt-6">
-      {post.imageURL && (
-        <img src={post.imageURL} alt={post.title} className="w-full h-64 object-cover rounded mb-6" />
-      )}
-      
-      <div className="flex justify-between items-start">
-        <h1 className="text-4xl font-bold mb-4 text-gray-800">{post.title}</h1>
-        {isOwner && (
-          <div className="flex gap-2">
-            <Link to={`/edit/${post._id}`} className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Edit</Link>
-            <button onClick={handleDelete} className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
-          </div>
+    <div className="page-shell">
+      <article className="card overflow-hidden">
+        {post.imageURL && (
+          <img
+            src={post.imageURL}
+            alt={post.title}
+            className="h-64 w-full object-cover"
+          />
         )}
-      </div>
 
-      <p className="text-gray-500 text-sm mb-6">
-        By <span className="font-semibold">{post.username}</span> on {new Date(post.createdAt).toLocaleDateString()}
-      </p>
+        <div className="p-5 sm:p-7">
+          <header className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h1 className="mb-2 text-2xl font-semibold text-slate-900 sm:text-3xl">
+                {post.title}
+              </h1>
+              <p className="text-xs text-slate-500">
+                By <span className="font-medium text-slate-700">{post.username}</span>{' '}
+                • {new Date(post.createdAt).toLocaleDateString()}
+              </p>
+            </div>
 
-      <div className="prose max-w-none text-gray-700 whitespace-pre-wrap">
-        {post.content}
-      </div>
+            {isOwner && (
+              <div className="flex gap-2">
+                <Link
+                  to={`/edit/${post._id}`}
+                  className="btn-ghost text-xs text-amber-600 hover:bg-amber-50 hover:text-amber-700"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={handleDelete}
+                  className="btn-ghost text-xs text-red-500 hover:bg-red-50 hover:text-red-600"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </header>
+
+          <hr className="mb-4 border-slate-100" />
+
+          <div className="prose max-w-none whitespace-pre-wrap text-sm leading-relaxed text-slate-800">
+            {post.content}
+          </div>
+        </div>
+      </article>
     </div>
   );
 };

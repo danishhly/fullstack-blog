@@ -9,8 +9,12 @@ const EditPost = () => {
   const [form, setForm] = useState({ title: '', content: '', imageURL: '' });
 
   useEffect(() => {
-    API.get(`/posts/${id}`).then(res => {
-      setForm({ title: res.data.title, content: res.data.content, imageURL: res.data.imageURL });
+    API.get(`/posts/${id}`).then((res) => {
+      setForm({
+        title: res.data.title,
+        content: res.data.content,
+        imageURL: res.data.imageURL,
+      });
     });
   }, [id]);
 
@@ -18,24 +22,51 @@ const EditPost = () => {
     e.preventDefault();
     try {
       await API.put(`/posts/${id}`, form);
-      toast.success("Post updated!");
+      toast.success('Post updated!');
       navigate(`/post/${id}`);
     } catch (err) {
-      toast.error("Update failed");
+      toast.error('Update failed');
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Edit Post</h2>
-      <form onSubmit={handleUpdate} className="space-y-4">
-        <input className="w-full p-2 border rounded" value={form.title} 
-          onChange={e => setForm({...form, title: e.target.value})} />
-        <input className="w-full p-2 border rounded" value={form.imageURL} 
-          onChange={e => setForm({...form, imageURL: e.target.value})} />
-        <textarea className="w-full p-2 border rounded h-40" value={form.content} 
-          onChange={e => setForm({...form, content: e.target.value})} />
-        <button className="bg-blue-600 text-white px-6 py-2 rounded">Update</button>
+    <div className="page-shell">
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold text-slate-900">Edit post</h2>
+        <p className="text-xs text-slate-500">
+          Refine your writing with small changes.
+        </p>
+      </div>
+
+      <form onSubmit={handleUpdate} className="card space-y-4 p-5">
+        <input
+          className="input"
+          value={form.title}
+          onChange={(e) => setForm({ ...form, title: e.target.value })}
+        />
+
+        <input
+          className="input"
+          value={form.imageURL}
+          onChange={(e) => setForm({ ...form, imageURL: e.target.value })}
+        />
+
+        <textarea
+          className="input h-40 resize-none"
+          value={form.content}
+          onChange={(e) => setForm({ ...form, content: e.target.value })}
+        />
+
+        <div className="flex justify-end gap-2">
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="btn-ghost text-sm"
+          >
+            Cancel
+          </button>
+          <button className="btn-primary text-sm">Update</button>
+        </div>
       </form>
     </div>
   );

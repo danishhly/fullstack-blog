@@ -11,7 +11,7 @@ const CreatePost = () => {
     e.preventDefault();
     try {
       await API.post('/posts', form);
-      toast.success('Post Created!');
+      toast.success('Post created!');
       navigate('/');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Error creating post');
@@ -19,28 +19,46 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Create Post</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input 
-          className="w-full p-2 border rounded" 
-          placeholder="Title (5-120 chars)" 
-          value={form.title} 
-          onChange={e => setForm({...form, title: e.target.value})} 
+    <div className="page-shell">
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold text-slate-900">New post</h2>
+        <p className="text-xs text-slate-500">
+          Share something meaningful in a clean space.
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="card space-y-4 p-5">
+        <input
+          className="input"
+          placeholder="Title (5–120 characters)"
+          value={form.title}
+          onChange={(e) => setForm({ ...form, title: e.target.value })}
         />
-        <input 
-          className="w-full p-2 border rounded" 
-          placeholder="Image URL (Optional)" 
-          value={form.imageURL} 
-          onChange={e => setForm({...form, imageURL: e.target.value})} 
+
+        <input
+          className="input"
+          placeholder="Image URL"
+          value={form.imageURL}
+          onChange={(e) => setForm({ ...form, imageURL: e.target.value })}
         />
-        <textarea 
-          className="w-full p-2 border rounded h-40" 
-          placeholder="Content (min 50 chars)" 
-          value={form.content} 
-          onChange={e => setForm({...form, content: e.target.value})} 
+
+        <textarea
+          className="input h-40 resize-none"
+          placeholder="Write your story…"
+          value={form.content}
+          onChange={(e) => setForm({ ...form, content: e.target.value })}
         />
-        <button className="bg-green-600 text-white px-6 py-2 rounded">Publish</button>
+
+        <div className="flex justify-end gap-2">
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="btn-ghost text-sm"
+          >
+            Cancel
+          </button>
+          <button className="btn-primary text-sm">Publish</button>
+        </div>
       </form>
     </div>
   );
