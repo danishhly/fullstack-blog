@@ -83,3 +83,37 @@ Authentication
 Posts
 Note: Write operations require Authorization: Bearer <token> header.
 
+| Method | Endpoint     | Description        | Payload / Params |
+|--------|--------------|--------------------|------------------|
+| **GET** | `/posts`       | Get all posts       | Query: `?page=1&limit=5&search=ai` |
+| **GET** | `/posts/:id`   | Get single post     | None |
+| **POST** | `/posts`       | Create post        | `{ "title": "...", "content": "...", "imageURL": "..." }` |
+| **PUT** | `/posts/:id`   | Update post  *(Must be Owner)* | `{ "title": "...", "content": "..." }` |
+| **DELETE** | `/posts/:id` | Delete post  *(Must be Owner)* | None |
+
+### Sample Request (Postman)
+f you are using Postman to test manually:
+Register: POST to  ```/auth/register```
+Login: POST to ```/auth/login```. Copy the token from the response.
+Create Post:
+    Select POST ```/posts```.
+    Go to Headers tab -> Key: ```Authorization```, Value: ```Bearer <your_copied_token>```.
+    Go to Body -> JSON:
+
+    ```
+    {
+ ``` "title": "My First Blog Post",```
+ ``` "content": "This is the content of the blog post. It needs to be at least 50 characters long so keep typing until you hit the limit.",```
+  ```"imageURL": "[https://placehold.co/600x400](https://placehold.co/600x400)"```
+```}```
+
+
+
+**Screenshots**
+**1. Home Feed (with Pagination & Search)**
+
+
+**2. Post Detail View**
+
+
+**3. Create/Edit Form**
