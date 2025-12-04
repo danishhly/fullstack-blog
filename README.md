@@ -99,15 +99,13 @@ Create Post:
     Select POST ```/posts```.
     Go to Headers tab -> Key: ```Authorization```, Value: ```Bearer <your_copied_token>```.
     Go to Body -> JSON:
-
-    ```
-    {
- ``` "title": "My First Blog Post",```
- ``` "content": "This is the content of the blog post. It needs to be at least 50 characters long so keep typing until you hit the limit.",```
-  ```"imageURL": "[https://placehold.co/600x400](https://placehold.co/600x400)"```
-```}```
-
-
+```
+{
+  "title": "My First Blog Post",
+  "content": "This is the content of the blog post. It needs to be at least 50 characters long so keep typing until you hit the limit.",
+  "imageURL": "[https://placehold.co/600x400](https://placehold.co/600x400)"
+}
+```
 
 **Screenshots**
 **1. Home Feed (with Pagination & Search)**
