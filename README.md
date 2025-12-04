@@ -109,7 +109,8 @@ Create Post:
 
 **Screenshots**
 **1. Home Feed (with Pagination & Search)**
-![Feed Screenshot](client/assets/images/HomePage.png)
+![Feed Screenshot](client/assets/HomePage.png)
+![Feed Screenshot](client/assets/Pagination.png)
 
 **2. Post Detail View**
 
