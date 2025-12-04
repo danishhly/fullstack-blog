@@ -11,14 +11,29 @@ const Register = () => {
   });
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await API.post('/auth/register', formData);
       toast.success('Registration successful! Please login.');
       navigate('/login');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Registration failed');
+      // Get the error message from the backend
+      const errorMsg = err.response?.data?.message || 'Registration failed';
+
+      // Check if it is a specific duplicate key error
+      if (errorMsg.includes('E11000') || errorMsg.includes('duplicate key')) {
+        if (errorMsg.includes('username')) {
+          toast.error('That username is already taken. Please choose another.');
+        } else if (errorMsg.includes('email')) {
+          toast.error('That email is already registered.');
+        } else {
+          toast.error('Username or Email already exists.');
+        }
+      } else {
+        // Fallback for other errors (like "All fields required")
+        toast.error(errorMsg);
+      }
     }
   };
 
