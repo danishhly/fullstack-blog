@@ -20,25 +20,40 @@ router.post('/', verifyToken, async(req, res) => {
         const savedPost = await newPost.save();
         res.status(201).json(savedPost);
     } catch (err) {
-        res.status(400).jsion({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 });
 
 // Read All with pagination
-router.get('/', async(req, res) => {
-    const { page = 1, limit = 10, search } = req.query;
-    try {
-        const query = search ? { title: {$regx: search, $options: 'i' } } : {} 
-        .sort({ createdAt: -1})
-        .limit(limit * 1)
-        .skip((page - 1) * limit);
+router.get('/', async (req, res) => {
+  const { page = 1, limit = 10, search } = req.query;
 
-        const count = await Post.countDocument(query);
-        res.json({ posts, totalPages: Math.ceil(count / limit), currentPage: page });
-    } catch (err) {
+  try {
+    // Build search filter
+    const query = search 
+      ? { title: { $regex: search, $options: 'i' } } 
+      : {};
+
+    // Fetch posts with pagination
+    const posts = await Post.find(query)
+      .sort({ createdAt: -1 })
+      .limit(Number(limit))
+      .skip((Number(page) - 1) * Number(limit));
+
+    // Count total matching posts
+    const count = await Post.countDocuments(query);
+
+    res.json({
+      posts,
+      totalPages: Math.ceil(count / limit),
+      currentPage: Number(page)
+    });
+
+  } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 // readOne
 
@@ -55,6 +70,8 @@ router.get('/:id', async (req, res) => {
 // Deletee
 
 router.delete('/:id', verifyToken, async (req, res) => {
+  console.log("POST ID:", req.params.id);
+  console.log("USER ID:", req.user.id);
     try {
         const post = await Post.findById(req.params.id);
         if(!post) return res.status(404).json({message: "Post not found" });
@@ -82,3 +99,5 @@ router.put('/:id', verifyToken, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+module.exports = router;

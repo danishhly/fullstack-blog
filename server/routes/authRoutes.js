@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 //register
@@ -10,7 +10,7 @@ router.post('/register', async (req, res) => {
         //validation
         if(!username || !email || !password) return res.status(400).json({ message: "All fields are required"});
 
-        const salt = await bcrypt.getSalt(10);
+        const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = new User({ username, email, password: hashedPassword });
@@ -35,3 +35,4 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: err.message });
     }
 });
+module.exports = router;
