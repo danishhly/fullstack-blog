@@ -23,6 +23,8 @@ function App() {
       <BrowserRouter>
         <div className="min-h-screen bg-gray-50 text-gray-900">
           <Toaster position="top-center" />
+          <Navbar />
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -36,6 +38,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/edit/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
           </Routes>
         </div>
       </BrowserRouter>
