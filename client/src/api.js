@@ -4,7 +4,7 @@ const API = axios.create({ baseURL: 'http://localhost:5000/api' });
 
 //Add token to every request if exists
 API.interceptors.request.use((req) => {
-    if(localStorage.getitems('token')) {
+    if(localStorage.getItem('token')) {
         req.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     }
     return req;

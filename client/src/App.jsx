@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, AuthContext } from './context/AuthContext';
@@ -7,6 +8,8 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
 import PostDetail from './pages/PostDetails';
+import Navbar from './components/Navbar';
+import EditPost from './pages/EditPost';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
