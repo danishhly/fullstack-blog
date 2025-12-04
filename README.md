@@ -1,4 +1,4 @@
-# 📝 Full-Stack Blog Application (MonoBlog)
+# Full-Stack Blog Application (MonoBlog)
 
  This is a MERN stack application (MongoDB, Express, React, Node.js) that allows users to read, create, edit, and delete posts. It features secure authentication, pagination, search functionality, and a responsive UI built with Tailwind CSS.
 
@@ -48,3 +48,31 @@ cd server
 node seed.js
 ```
 Check the console for the "Database Seeded!" message.
+
+### 5. Running the App (Development)
+Terminal 1 (Backend)
+```Bash
+cd server
+npm run dev
+```
+Runs on http://localhost:5000
+
+Terminal 2 (Frontend)
+```Bash
+cd client
+npm run dev
+```
+Runs on http://localhost:5173
+
+### 6. Production Build (How to build)
+```Bash
+cd client
+npm run build
+```
+This creates a dist folder with static files that can be served by Nginx or the Node server.
+
+## API Documentation
+Base URL: http://localhost:5000/api
+Method,Endpoint,Description,Payload
+POST,/auth/register,Register a new user,"{ ""username"": ""dan"", ""email"": ""dan@test.com"", ""password"": ""123"" }"
+POST,/auth/login,Login user,"{ ""email"": ""dan@test.com"", ""password"": ""123"" }"
