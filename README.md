@@ -114,8 +114,11 @@ Create Post:
 
 **2. Post Detail View**
 ![Feed Screenshot](client/assets/postdetail1.png)
-This can be viewed by everyone but can't be edited
+**This can be viewed by everyone but can't be edited**
 
 **3. Create/Edit Form**
 ![Feed Screenshot](client/assets/Postdetails.png)
-This can be edited and deleted by owner of the post only
+**This can be edited and deleted by owner of the post only**
+
+##  Demo
+![App Demo](client/assets/demo.gif)
