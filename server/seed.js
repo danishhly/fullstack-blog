@@ -25,14 +25,13 @@ const seedDB = async () => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash('password123', salt);
 
-    const user = await User.create({
-      username: 'DemoUser',
-      email: 'demo@example.com',
-      password: hashedPassword
-    });
-    console.log('Created User: demo@example.com / password123');
+    // const user = await User.create({
+    //   username: 'DemoUser',
+    //   email: 'demo@example.com',
+    //   password: hashedPassword
+    // });
+    // console.log('Created User: demo@example.com / password123');
 
-    // 🔥 20 Updated Image URLs (Unsplash High Quality)
     const imageURLs = [
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92",
